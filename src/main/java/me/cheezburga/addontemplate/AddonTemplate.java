@@ -18,18 +18,20 @@ public final class AddonTemplate extends JavaPlugin {
         instance = this;
 
         try {
+            // Trying to register the addon and load the syntax elements
             skriptAddon = Skript.registerAddon(this).setLanguageFileDirectory("lang");
             skriptAddon.loadClasses("me.cheezburga.addontemplate.elements");
         } catch (IOException e) {
+            // Throw an error if any of that fails
             throw new RuntimeException("Failed to load AddonTemplate: " + e.getMessage());
         }
 
-        loadMetrics();
-        checkUpdate(getDescription().getVersion());
+        loadMetrics(); // Load bStats metrics
+        checkUpdate(getDescription().getVersion()); // Check for updates
     }
 
     private void loadMetrics() {
-        Metrics metrics = new Metrics(this, 12345); // TODO: replace this with your bStats service ID
+        Metrics metrics = new Metrics(this, 12345); // TODO: Replace this with your bStats service ID
         metrics.addCustomChart(new Metrics.SimplePie("skriptVersion", () -> Skript.getVersion().toString()));
     }
 

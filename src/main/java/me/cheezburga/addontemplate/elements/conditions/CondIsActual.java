@@ -16,6 +16,7 @@ import java.util.UUID;
 public class CondIsActual extends PropertyCondition<Object> {
 
     static {
+        // PropertyConditions provide a register method which handles most of the methods (e.g. init) for you
         register(CondIsActual.class, "[a|an] (actual|real) uuid", "objects");
     }
 
