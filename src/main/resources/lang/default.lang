@@ -1,0 +1,4 @@
+version: @version@
+
+types:
+    actualuuid: actual uuid¦s

@@ -1,0 +1,38 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'java'
+}
+
+group = 'me.cheezburga'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+
+    maven { url = "https://repo.papermc.io/repository/maven-public/" }
+    maven { url = "https://repo.skriptlang.org/releases" }
+
+    maven { url = "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+    compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
+    compileOnly("com.github.SkriptLang:Skript:2.9.0") { transitive = false }
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+}
+
+def oldestJava = 17
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ["-source", "" + oldestJava, "-target", "" + oldestJava]
+}
+
+processResources {
+    filesMatching(["plugin.yml", "lang/default.lang"]) {
+        filter ReplaceTokens, tokens: ["version": project.version]
+    }
+}

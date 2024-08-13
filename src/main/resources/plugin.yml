@@ -1,0 +1,7 @@
+name: AddonTemplate
+version: '@version@'
+main: me.cheezburga.addontemplate.AddonTemplate
+api-version: '1.21'
+prefix: addon-template
+depend: [Skript]
+author: 'cheezburga'
